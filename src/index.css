@@ -1,1 +1,76 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(53, 52, 52);
+}
+
+main {
+    /* background-color: white; */
+    width:  300px;
+    margin: 4em 0 0 20em;
+    height: 80vh;
+}
+/* Cover / HEADER*/
+#coverContenedor {
+    position: relative;
+    height:300px;
+}
+
+#cover {
+    position: absolute;
+    max-width: 300px;
+    z-index: -1;
+}
+
+#botonList {
+    background-color:unset;
+    border: none;
+    position: absolute;
+    right: 10px;
+    top: 15px;
+}
+
+#tiemAct {
+    position: absolute;
+    bottom: 0;
+    background-color: aliceblue;
+}
+
+#tiemTot {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: aliceblue;
+}
+
+/* Controles y Datos*/
+
+#panelControl {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 20vh;
+}
+
+/*Panel Con frase*/
+
+#panelInformativo {
+    background-color: rgb(223, 235, 245);
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*Barra estado*/ 
+#barraEstado {
+    background-color: black;
+}
+ 
+
 
