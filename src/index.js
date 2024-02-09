@@ -1,3 +1,5 @@
+
+/** Datos */
 let datosJSON = `[
     {
       "title": "Monkey Island Theme",
@@ -25,4 +27,51 @@ let datosJSON = `[
     }
 ]`;
 
+/** Elementos */
+let reproduciendo = Boolean;
+let music = JSON.parse(datosJSON);
+let audio = document.createElement("audio");
+audio.src = music[0].url;
+// audio.controls = true;
+let panel = document.getElementById("panelControl")
+panel.appendChild(audio)
+// audio.play()
 
+/* Enviar canciones al DOM */
+let lista = document.getElementById("listaCanciones");
+for (let i = 0; i < music.length; i++) {
+    let cancionAAgregar = document.createElement("div")
+    cancionAAgregar.className = "cancion";
+    cancionAAgregar.innerHTML = `<p> ${i+1}. ${music[i].artist} - ${music[i].title}</p>
+                                <hr>`
+
+    lista.appendChild(cancionAAgregar);
+}
+
+/** Función toggle lista  */
+let listBoton = document.getElementById("botonList");
+let abierta = false;
+
+listBoton.addEventListener("click", () => {
+    if(abierta) {
+        lista.style = "left: 0;"
+        abierta = false; 
+        return
+    };
+    lista.style = "left: 100%;"
+    abierta = true;
+})
+
+/* Funcion Play */
+
+let playBoton = document.getElementById("play");
+playBoton.addEventListener("click", () => play())
+function play() {
+    if(reproduciendo) {
+        audio.pause()
+        reproduciendo = false; 
+        return
+    };
+    audio.play()
+    reproduciendo = true;
+}

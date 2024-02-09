@@ -7,6 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="./index.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,200;8..144,500&display=swap" rel="stylesheet">
   <script type="module" src="./index.js"></script>
 </head>
 
@@ -14,14 +17,19 @@
   <main>
     <section id="coverContenedor">
       <img id="cover" src="./assets/img/monkey.jpg" alt="cover">
-      <button id="botonList"><img style="max-width: 20px;" src="./assets/img/list-music-svgrepo-com.svg" alt="Lista de música"></button>
+      <button type="button" id="botonList"><img style="max-width: 20px;" src="./assets/img/list-music-svgrepo-com.svg" alt="Lista de música"></button>
       <p id="tiemAct">tiempoactual</p>
       <p id="tiemTot">tiempo total</p>
+      <div id="listaCanciones" class="cerrada"></div>
     </section>
     <section id="panelControl">
       <h1 id="titulo">Titulo</h1>
-      <h6 id="Artista">Artista</h6>
-      <p id="controles">controles</p>
+      <h6 id="artista">Artista</h6>
+      <div id="controles">
+        <img  src="./assets/img/prev-svgrepo-com.svg" alt="prev">
+        <img id="play" src="./assets/img/play-svgrepo-com.svg" alt="">
+        <img src="./assets/img/next-svgrepo-com.svg" alt="">
+      </div>
     </section>
     <section id="panelInformativo">frase motivadora¿?</section>
     <div id="barraEstado"> barra de estado</div>

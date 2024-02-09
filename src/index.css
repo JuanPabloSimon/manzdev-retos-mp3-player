@@ -1,6 +1,7 @@
 * {
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Roboto Flex', sans-serif;
 }
 
 body {
@@ -46,6 +47,30 @@ main {
     background-color: aliceblue;
 }
 
+#listaCanciones {
+    font-size: 0.8em;
+    padding: 1em;
+    position: absolute;
+    z-index: -2;
+    background-color: aliceblue;
+    width: 22em;
+    top: 20px;
+    left: 0;
+    transition: all ease-in 0.5s;
+}
+
+.cancion {
+    margin: 6px;
+}
+
+.cancion hr {
+    margin-top: 2px;
+    text-align: center;
+    width: 80%;
+
+}
+
+
 /* Controles y Datos*/
 
 #panelControl {
@@ -55,6 +80,16 @@ main {
     align-items: center;
     justify-content: space-evenly;
     height: 20vh;
+}
+
+#titulo {
+    font-weight: bolder;
+}
+#artista {
+    margin-top: -2em;
+}
+#controles img {
+    margin: 0 1em;
 }
 
 /*Panel Con frase*/
@@ -73,4 +108,5 @@ main {
 }
  
 
+/* EFECTOS */
 
