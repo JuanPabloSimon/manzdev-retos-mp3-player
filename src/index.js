@@ -27,18 +27,25 @@ let datosJSON = `[
     }
 ]`;
 
-/** Elementos */
-let reproduciendo = Boolean;
-let music = JSON.parse(datosJSON);
-let audio = document.createElement("audio");
-audio.src = music[0].url;
-// audio.controls = true;
-let panel = document.getElementById("panelControl")
-panel.appendChild(audio)
-// audio.play()
+/** Variables */
+let reproduciendo = false; // utilizado en funcion de reproducir 
+let music = JSON.parse(datosJSON); // lista de musica parseada
+let abierta = false;  // utilizada en funcion de toggle lista de musica
+
+/* Elementos DOM  */
+let nombreCancion = document.querySelector("#titulo"),
+    artistaCancion = document.querySelector("#artista"),
+    imgCancion = document.querySelector("#cover"),
+    mainAudio = document.querySelector("#audio"),
+    prevBotton = document.querySelector("#prev"),
+    nextBotton = document.querySelector("#next"),
+    barraEstado = document.querySelector("#barraEstado"),
+    lista = document.getElementById("listaCanciones"),
+    listBoton = document.getElementById("botonList"),
+    playBoton = document.getElementById("play");
+
 
 /* Enviar canciones al DOM */
-let lista = document.getElementById("listaCanciones");
 for (let i = 0; i < music.length; i++) {
     let cancionAAgregar = document.createElement("div")
     cancionAAgregar.className = "cancion";
@@ -49,8 +56,6 @@ for (let i = 0; i < music.length; i++) {
 }
 
 /** Función toggle lista  */
-let listBoton = document.getElementById("botonList");
-let abierta = false;
 
 listBoton.addEventListener("click", () => {
     if(abierta) {
@@ -63,15 +68,86 @@ listBoton.addEventListener("click", () => {
 })
 
 /* Funcion Play */
-
-let playBoton = document.getElementById("play");
 playBoton.addEventListener("click", () => play())
+
 function play() {
     if(reproduciendo) {
         audio.pause()
         reproduciendo = false; 
+        playBoton.src = "./assets/img/play-svgrepo-com.svg"
         return
     };
     audio.play()
+    playBoton.src = "./assets/img/pause-svgrepo-com.svg"
     reproduciendo = true;
 }
+
+/**Experimentando xd */
+
+
+let musicIndex = Math.floor(Math.random() * music.length + 1);
+
+window.addEventListener("load", () => {
+    cargarMusica(musicIndex)
+})
+
+function cargarMusica(index) {
+    nombreCancion.innerHTML = music[index - 1].title;
+    artistaCancion.innerHTML = music[index - 1].artist;
+    imgCancion.src = `./assets/img/${music[index -1].image}`
+    mainAudio.src = `${music[index - 1].url}`
+}
+
+function next() {
+    musicIndex++;
+    musicIndex > music.length ? musicIndex = 1 : musicIndex = musicIndex;
+    cargarMusica(musicIndex);
+    mainAudio.play();
+}
+function prev() {
+    musicIndex--;
+    musicIndex < 1 ? musicIndex = music.length : musicIndex = musicIndex;
+    cargarMusica(musicIndex);
+    mainAudio.play();
+}
+
+prevBotton.addEventListener("click", () => prev())
+nextBotton.addEventListener("click", () => next())
+
+mainAudio.addEventListener("timeupdate", (e) => {
+    const tiempoActual = e.target.currentTime;
+    const duracion = e.target.duration;
+    let progreso = (tiempoActual / duracion) * 100;
+    barraEstado.style.width = `${progreso}%`;
+
+    let tiemAct = document.querySelector("#tiemAct"),
+        durationDom = document.querySelector("#tiemTot");
+
+    mainAudio.addEventListener("loadeddata", () => {
+        let mainDuration  = mainAudio.duration;
+        let minTotal = Math.floor(mainDuration / 60);
+        let segTotal = Math.floor(mainDuration % 60)
+        if (segTotal < 10) {
+            segTotal = `0${segTotal}`;
+        }
+        durationDom.innerHTML = `${minTotal}:${segTotal}`;
+    })
+
+    let minutoActual = Math.floor(tiempoActual / 60);
+    let segActual = Math.floor(tiempoActual % 60);
+    if (segActual < 10) {
+        segActual = `0${segActual}`
+    }
+    tiemAct.innerHTML = `${minutoActual}:${segActual}`
+})
+
+let areaEstado = document.querySelector(".area-estado")
+
+areaEstado.addEventListener("click", (e) => {
+    let progreso = areaEstado.clientWidth;
+    let clickedOffSetX = e.offsetX;
+    let duracion = mainAudio.duration;
+
+    mainAudio.currentTime = (clickedOffSetX / progreso) * duracion;
+    mainAudio.play
+})
