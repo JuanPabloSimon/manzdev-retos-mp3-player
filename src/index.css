@@ -23,7 +23,7 @@ main {
 #cover {
     position: absolute;
     max-width: 300px;
-    z-index: -1;
+    z-index: 1;
 }
 
 #botonList {
@@ -32,6 +32,7 @@ main {
     position: absolute;
     right: 10px;
     top: 15px;
+    z-index: 2;
 }
 
 #tiemAct {
@@ -40,9 +41,11 @@ main {
     left: 3px;
     color: white;
     background-color: unset;
+    z-index: 2;
 }
 
 #tiemTot {
+    z-index: 2;
     position: absolute;
     bottom: 3px;
     right: 3px;
@@ -54,12 +57,20 @@ main {
     font-size: 0.8em;
     padding: 1em;
     position: absolute;
-    z-index: -2;
     background-color: rgb(151, 151, 151);
     width: 22em;
     top: 20px;
-    left: 0;
     transition: all ease-in 0.5s;
+}
+
+.cerrada {
+    z-index: -2;
+    left: 0;
+}
+
+.listaAbierta {
+    left: 100%;
+    z-index: 0;
 }
 
 .cancion {

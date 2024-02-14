@@ -49,7 +49,7 @@ let nombreCancion = document.querySelector("#titulo"),
 for (let i = 0; i < music.length; i++) {
     let cancionAAgregar = document.createElement("div")
     cancionAAgregar.className = "cancion";
-    cancionAAgregar.innerHTML = `<p> ${i+1}. ${music[i].artist} - ${music[i].title}</p>
+    cancionAAgregar.innerHTML = `<p class="song${i}" onclick="play()"> ${i+1}. ${music[i].artist} - ${music[i].title}</p>
                                 <hr>`
 
     lista.appendChild(cancionAAgregar);
@@ -59,11 +59,13 @@ for (let i = 0; i < music.length; i++) {
 
 listBoton.addEventListener("click", () => {
     if(abierta) {
-        lista.style = "left: 0;"
+        // lista.style = "left: 0;"
+        lista.classList.add("listaAbierta");
         abierta = false; 
         return
     };
-    lista.style = "left: 100%;"
+    // lista.style = " left: 100%;"
+    lista.classList.remove("listaAbierta")
     abierta = true;
 })
 
@@ -103,12 +105,18 @@ function next() {
     musicIndex > music.length ? musicIndex = 1 : musicIndex = musicIndex;
     cargarMusica(musicIndex);
     mainAudio.play();
+    reproduciendo = true;
+    playBoton.src = "./assets/img/pause-svgrepo-com.svg"
+
 }
 function prev() {
     musicIndex--;
     musicIndex < 1 ? musicIndex = music.length : musicIndex = musicIndex;
     cargarMusica(musicIndex);
     mainAudio.play();
+    reproduciendo = true;
+    playBoton.src = "./assets/img/pause-svgrepo-com.svg"
+
 }
 
 prevBotton.addEventListener("click", () => prev())
@@ -151,3 +159,7 @@ areaEstado.addEventListener("click", (e) => {
     mainAudio.currentTime = (clickedOffSetX / progreso) * duracion;
     mainAudio.play
 })
+
+let songs = document.querySelectorAll(".cancion");
+songs.forEach(el => el.addEventListener("click", () => play()));
+console.log(songs);
